@@ -1,0 +1,4 @@
+data(iris)
+names(iris) = c("SL","SW","PL","PW","SP")
+levels(iris$SP) = c("st","vc","vg")
+write.csv(iris, file=’d:/rpy/niris.csv’)
