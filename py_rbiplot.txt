@@ -1,0 +1,55 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+#데이터 읽기
+heptathlon = pd.read_csv("c:/data/pydata/heptathlon.csv")
+heptathlon.head(3)
+# 변수이름 확인하기
+heptathlon.columns
+# 변환: 변수최댓값 - 변숫값
+heptathlon.hurdles = np.max(heptathlon.hurdles) - heptathlon.hurdles
+heptathlon.run200m = np.max(heptathlon.run200m) - heptathlon.run200m
+heptathlon.run800m = np.max(heptathlon.run800m) - heptathlon.run800m
+# 분석변수 선택하기
+hep_data = heptathlon.iloc[:, 1:-1]
+
+def ZScaler(data) :
+    from sklearn.preprocessing import StandardScaler
+    z = StandardScaler()
+    z.fit(data)
+    zdata = z.transform(data)
+    n = z.n_samples_seen_
+    zdata = zdata * np.sqrt((n-1)/n)
+    return zdata, z, n
+
+# 변수 표준화 – 새로운 함수 이용
+zhep_data, _, _ = ZScaler(hep_data)
+
+# 초기 주성분분석
+from sklearn.decomposition import PCA
+pca_init = PCA(n_components=len(hep_data.columns))
+pca_init.fit(zhep_data)
+np.round(pca_init.explained_variance_, 3)
+# Out[19]: array([4.46 , 1.194, 0.521, 0.457, 0.245, 0.073, 0.049])
+np.round(np.cumsum(pca_init.explained_variance_), 3)
+# Out[21]: array([4.46 , 5.655, 6.176, 6.633, 6.878, 6.951, 7.   ])
+
+
+# biplot using rpy2 in Python 
+# pip install rpy2  (in c:\anaconda3 )
+import rpy2.robjects as ro
+import rpy2.robjects.numpy2ri
+rpy2.robjects.numpy2ri.activate()
+
+labels = [heptathlon.iloc[:, 0], hep_data.columns]
+lab1 = ro.StrVector(labels[0])
+lab2 = ro.StrVector(labels[1])
+
+nr, nc = zhep_data.shape
+r = ro.r
+xr = r.matrix(zhep_data, nrow=nr, ncol=nc)
+# ro.r.assign("x", xr)
+
+r_pca = r.princomp(xr)
+# r.summary(r_pca)
+r.biplot(r_pca, xlabs=lab1, ylabs=lab2, main="AAA")  

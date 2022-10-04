@@ -1,0 +1,51 @@
+# Python : z-score Standardization 
+
+import numpy as np
+import pandas as pd
+heptathlon = pd.read_csv("c:/data/hep.csv")
+X = hep.iloc[:, 1:-1]
+from sklearn.model_selection import train_test_split
+X_train, X_test = train_test_split(
+     X, train_size=0.7, random_state=12345)
+
+X_train.to_csv("c:/data/Xtrain.csv")
+X_test.to_csv("c:/data/Xtest.csv")
+
+ZX_train, zfit_train, n_train = ZScaler(X_train)
+ZX_test = ZScaler_test(X_test, zfit_train, n_train)
+ZX_test = pd.DataFrame(ZX_test)
+np.round(ZX_test.head(),3)
+Out[43]: 
+       0      1      2      3      4      5      6
+0  0.412 -0.691 -0.108  0.935 -1.242 -0.673  0.859
+1 -0.175  0.691  0.020  0.274 -0.114  0.848  0.734
+2 -0.266  0.691  0.700  0.347 -0.133  0.115  0.033
+3  0.197  0.000 -0.800  1.036 -0.351 -1.893 -0.190
+4 -0.446  0.346 -0.229  0.907  0.286 -1.868  0.285
+
+
+# R : z-score Standardization 
+
+library(HSAUR2)
+data(heptathlon)
+write.csv(heptathlon, file="c:/data/hep.csv")
+# After Pytho job, read train, test data 
+X_train = read.csv("c:/data/Xtrain.csv")
+X_test = read.csv("c:/data/Xtest.csv")
+X_train = X_train[,-1]
+X_test = X_test[,-1]
+ztrain  =  RStandardization(X_train, method="zscore")
+ztrain_data = ztrain$zdata
+ztrain_center = ztrain$center
+ztrain_scale = ztrain$scale
+ztest_data = RStandardization_test(X_test, ztrain_center, ztrain_scale)
+round(head(ztest_data,5),3)
+     hurdles highjump   shot run200m longjump javelin run800m
+[1,]   0.412   -0.691 -0.108   0.935   -1.242  -0.673   0.859
+[2,]  -0.175    0.691  0.020   0.274   -0.114   0.848   0.734
+[3,]  -0.266    0.691  0.700   0.347   -0.133   0.115   0.033
+[4,]   0.197    0.000 -0.800   1.036   -0.351  -1.893  -0.190
+[5,]  -0.446    0.346 -0.229   0.907    0.286  -1.868   0.285
+> 
+
+
