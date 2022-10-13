@@ -17,17 +17,17 @@ utils = rpackages.importr('utils')
 from rpy2.robjects.vectors import StrVector
 utils.install_packages(StrVector('ggplot2'))
 
-pp = (ggplot2.ggplot(mtcars) + \
+gp = (ggplot2.ggplot(mtcars) + \
      ggplot2.aes_string(x='wt', y='mpg', col='factor(cyl)')) + \
      ggplot2.geom_point()
 
-pp.plot()
+gp.plot()
 grdevices = importr('grDevices')
 
-pp2 = (ggplot2.ggplot(mtcars) +
+gp2 = (ggplot2.ggplot(mtcars) +
       ggplot2.aes_string(x='wt', y='mpg', col='factor(cyl)') +
       ggplot2.geom_point() +
       ggplot2.geom_smooth(ggplot2.aes_string(group = 'cyl'),
                           method = 'lm'))
-pp2.plot()
+gp2.plot()
 grdevices = importr('grDevices')
