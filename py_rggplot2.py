@@ -24,10 +24,7 @@ gp = (ggplot2.ggplot(mtcars) + \
 gp.plot()
 grdevices = importr('grDevices')
 
-gp2 = (ggplot2.ggplot(mtcars) +
-      ggplot2.aes_string(x='wt', y='mpg', col='factor(cyl)') +
-      ggplot2.geom_point() +
-      ggplot2.geom_smooth(ggplot2.aes_string(group = 'cyl'),
-                          method = 'lm'))
+gp2 = gp + ggplot2.geom_smooth(ggplot2.aes_string(group = 'cyl'),
+                               method = 'lm'))
 gp2.plot()
 grdevices = importr('grDevices')
