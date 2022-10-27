@@ -27,22 +27,6 @@ np.round(pca_init.explained_variance_, 3)
 np.round(np.cumsum(pca_init.explained_variance_), 3)
 # Out[14]: array([4.646, 5.89 , 6.433, 6.909, 7.165, 7.241, 7.292])
 
-
-RStandardization = function(data, method=“zscore”)
-{
-    if(method != “zscore”) method = “minmax”
-    if(method = “zscore”)
-       zdata = scale(data, center=TRUE, scale=TRUE)    
-    else if(method = “minmax”)
-       {
-            # 0-1 transformation
-            maxX = apply(data, 2, max)
-            minX = apply(data, 2, min)   
-            zdata = scale(data, center=minX, scale=maxX – minX)
-        }
-     return(zdata)
-}
-
 def ZScaler(data) :
     from sklearn.preprocessing import StandardScaler
     z = StandardScaler()
