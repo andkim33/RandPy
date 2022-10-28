@@ -2,16 +2,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 #데이터 읽기
-heptathlon = pd.read_csv("c:/data/pydata/heptathlon.csv")
-heptathlon.head(3)
+hep = pd.read_csv("c:/data/pydata/heptathlon.csv")
+hep.head(3)
 # 변수이름 확인하기
-heptathlon.columns
+hep.columns
 # 변환: 변수최댓값 - 변숫값
-heptathlon.hurdles = np.max(heptathlon.hurdles) - heptathlon.hurdles
-heptathlon.run200m = np.max(heptathlon.run200m) - heptathlon.run200m
-heptathlon.run800m = np.max(heptathlon.run800m) - heptathlon.run800m
+hep.hurdles = np.max(hep.hurdles) - hep.hurdles
+hep.run200m = np.max(hep.run200m) - hep.run200m
+hep.run800m = np.max(hep.run800m) - hep.run800m
 # 분석변수 선택하기
-hep_data = heptathlon.iloc[:, 1:-1]
+hep_data = hep.iloc[:, 1:-1]
 # 변수 표준화 – 기존 이용
 from sklearn.preprocessing import StandardScaler
 zx = StandardScaler().fit_transform(hep_data)
@@ -55,7 +55,7 @@ import rpy2.robjects as ro
 import rpy2.robjects.numpy2ri
 rpy2.robjects.numpy2ri.activate()
 
-labels = [heptathlon.iloc[:, 0], hep_data.columns]
+labels = [hep.iloc[:, 0], hep_data.columns]
 lab1 = ro.StrVector(labels[0])
 lab2 = ro.StrVector(labels[1])
 
