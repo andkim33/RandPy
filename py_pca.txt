@@ -7,11 +7,11 @@ hep.head(3)
 # 변수이름 확인하기
 hep.columns
 # 변환: 변수최댓값 - 변숫값
-heptathlon.hurdles = np.max(heptathlon.hurdles) - heptathlon.hurdles
-heptathlon.run200m = np.max(heptathlon.run200m) - heptathlon.run200m
-heptathlon.run800m = np.max(heptathlon.run800m) - heptathlon.run800m
+hep.hurdles = np.max(hep.hurdles) - hep.hurdles
+hep.run200m = np.max(hep.run200m) - hep.run200m
+hep.run800m = np.max(hep.run800m) - hep.run800m
 # 분석변수 선택하기
-hep_data = heptathlon.iloc[:, 1:-1]
+hep_data = hep.iloc[:, 1:-1]
 # 변수 표준화 – 기존 이용
 from sklearn.preprocessing import StandardScaler
 zx = StandardScaler().fit_transform(hep_data)
