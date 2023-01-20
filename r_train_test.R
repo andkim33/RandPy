@@ -1,5 +1,6 @@
 Train_Test_Split_m1 = function(data, SplitRatio = 0.7) 
  {
+   # set.seed(12345)
    split_size = round(nrow(data)*SplitRatio) 
    train_id = sample(c(1:nrow(data)), size=split_size)
    train_data = data[train_id,]
@@ -14,6 +15,7 @@ Train_Test_Split_m2 = function(data, SplitRatio = 0.7)
     require(dplyr)
     library(dplyr)
     data$id <- 1:nrow(data)
+    # set.seed(34567) 
     train_data <- data %>% dplyr::sample_frac(SplitRatio)
     test_data  <- dplyr::anti_join(data, train, by = 'id')
     result = list(train_data = train_data, test_data=test_data)
