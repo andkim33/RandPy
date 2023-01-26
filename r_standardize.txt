@@ -81,7 +81,7 @@ ztrain_center = ztrain$center
 ztrain_scale = ztrain$scale
 
 ztest_data = RStandardization_test(X_test, ztrain_center, ztrain_scale)
-ztest2_data = RStandardization2_test(train, test, method="zscore")
+ztest2_data = RStandardization2_test(train_data, test_data, method="zscore")
 
 head(ztest_data)
 head(ztest2_data)
