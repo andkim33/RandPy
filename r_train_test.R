@@ -17,7 +17,7 @@ Train_Test_Split_m2 = function(data, SplitRatio = 0.7)
     data$id <- 1:nrow(data)
     # set.seed(34567) 
     train_data <- data %>% dplyr::sample_frac(SplitRatio)
-    test_data  <- dplyr::anti_join(data, train, by = 'id')
+    test_data  <- dplyr::anti_join(data, train_data, by = 'id')
     result = list(train_data = train_data, test_data=test_data)
     return(result)
 }
