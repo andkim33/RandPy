@@ -29,7 +29,7 @@ Out[43]:
 library(HSAUR2)
 data(heptathlon)
 write.csv(heptathlon, file="c:/data/hep.csv")
-# After Pytho job, read train, test data 
+# After Python job, read train, test data 
 X_train = read.csv("c:/data/Xtrain.csv")
 X_test = read.csv("c:/data/Xtest.csv")
 X_train = X_train[,-1]
