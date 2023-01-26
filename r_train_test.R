@@ -25,9 +25,9 @@ Train_Test_Split_m2 = function(data, SplitRatio = 0.7)
 
 data(iris)
 train_test = Train_Test_Split_m1(iris, SplitRatio=0.6)
-train = dim(train_test$train_data
+train = train_test$train_data
+test = train_test$test_data
 dim(train)
-test = dim(train_test$test_data
 dim(test)
 
 
